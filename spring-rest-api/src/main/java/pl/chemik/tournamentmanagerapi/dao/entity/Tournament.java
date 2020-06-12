@@ -2,13 +2,11 @@ package pl.chemik.tournamentmanagerapi.dao.entity;
 
 import org.apache.tomcat.jni.Local;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name="tournamnets", schema = "public")
 public class Tournament {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
