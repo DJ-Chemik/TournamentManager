@@ -8,6 +8,8 @@ const RegistrationPage = () => {
     const passwordInput = useFormInput("");
 
     const handleSubmit = () => {
+        // SEND EMAIL
+        // ADD USER
         console.log(`${nameInput.value} ${surnameInput.value} at ${emailInput.value} <<${passwordInput.value}>>`)
     }
 
