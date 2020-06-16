@@ -1,7 +1,11 @@
 import React from 'react';
 import useFormInput from '../../ownHooks/UseFormInput';
 
-const RegistrationPage = () => {
+interface Props{
+    backToLogging: () => void;
+  }
+
+const RegistrationPage = (props: Props) => {
     const nameInput = useFormInput("");
     const surnameInput = useFormInput("");
     const emailInput = useFormInput("");
@@ -11,6 +15,10 @@ const RegistrationPage = () => {
         // SEND EMAIL
         // ADD USER
         console.log(`${nameInput.value} ${surnameInput.value} at ${emailInput.value} <<${passwordInput.value}>>`)
+    }
+
+    const handleBackToLogging = () => {
+        props.backToLogging();
     }
 
     return (
@@ -57,6 +65,7 @@ const RegistrationPage = () => {
                     />
                 </div>
                 <input type="button" value="Zarejestruj" onClick={handleSubmit}/>
+                <input type="button" value="Wróć do strony logowania" onClick={handleBackToLogging}/>
             </form>
         
         </div>
