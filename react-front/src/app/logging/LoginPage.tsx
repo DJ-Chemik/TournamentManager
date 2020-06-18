@@ -2,7 +2,11 @@ import React from 'react';
 import useFormInput from '../../ownHooks/UseFormInput';
 import RegistrationPage from './RegistrationPage';
 
-const LoginPage = () => {
+interface Props {
+    goToMainPage: () => void;
+}
+
+const LoginPage = (props: Props) => {
     const emailInput = useFormInput("");
     const passwordInput = useFormInput("");
     const [wantRegister, setWantRegister] = React.useState<boolean>(false);
@@ -21,11 +25,15 @@ const LoginPage = () => {
 
     if(wantRegister){
         return(
-            <RegistrationPage backToLogging={() => {setWantRegister(false)}}/>
+            <div>
+                <button onClick={props.goToMainPage}>Wróć do strony głównej</button>
+                <RegistrationPage backToLogging={() => {setWantRegister(false)}}/>
+            </div>
         )
     }else{
         return (
         <div>
+                <button onClick={props.goToMainPage}>Wróć do strony głównej</button>
                 <form>
                     <div>
                         <label>E-mail: </label>

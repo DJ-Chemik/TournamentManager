@@ -4,7 +4,12 @@ import './MainPage.css'
 import { ITournament } from '../Tournament';
 import TournamentTilesList from './TournamentTilesList';
 
-const MainPage = () => {
+interface Props {
+  whenUserWantLogIn: () => void;
+  whenUserWantRegister: () => void;
+}
+
+const MainPage = (props: Props) => {
   const [tournaments, setTournaments] = useState<ITournament[] | undefined>();
 
   useEffect( () => {
@@ -24,9 +29,21 @@ const MainPage = () => {
     })
   }, [])
 
+  const handleButtonLogIn = () => {
+    props.whenUserWantLogIn();
+  }
+
+  const handleButtonRegister = () => {
+    props.whenUserWantRegister();
+  }
+
   if(tournaments){
     return (
       <div>
+        <div>
+          <button onClick={handleButtonLogIn}>Zaloguj się</button>
+          <button onClick={handleButtonRegister}>Zarejestruj się</button>
+        </div>
         <TournamentTilesList tournaments={tournaments}/>
       </div>
     );
