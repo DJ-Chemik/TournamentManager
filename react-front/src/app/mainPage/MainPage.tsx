@@ -1,24 +1,37 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios'
+import './MainPage.css'
+import { ITournament } from '../Tournament';
+import TournamentTilesList from './TournamentTilesList';
 
 const MainPage = () => {
-  const [tournaments, setTournaments] = useState();
+  const [tournaments, setTournaments] = useState<ITournament[] | undefined>();
 
   useEffect( () => {
-    fetch( "http://localhost:8080/api/tournaments")
-      .then(response => response.json())
-      .then(jsonData => {
-        console.log(jsonData);
-        setTournaments(jsonData.results)
-      })
-      .catch( () => console.log("ERORR"))
-    console.log(tournaments);
-  })
+    fetchTournamentsDataFromApi();
+  }, [])
 
-  return (
-    <div>
-      
-    </div>
-  );
+  const fetchTournamentsDataFromApi = React.useCallback( () => {
+    axios({
+      "method": "GET",
+      "url": "http://localhost:8080/api/tournaments",
+    })
+    .then((response) => {
+      setTournaments(response.data);
+    })
+    .catch((error) => {
+      console.log("Error: " + error);
+    })
+  }, [])
+
+  if(tournaments){
+    return (
+      <div>
+        <TournamentTilesList tournaments={tournaments}/>
+      </div>
+    );
+  }
+  return <p> LOADER </p>;
 }
 
 export default MainPage;
