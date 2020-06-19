@@ -4,7 +4,7 @@ import LoginPage from './logging/LoginPage';
 import MainPage from './mainPage/MainPage';
 import TournamentViewPage from './tournamentViewPage/TournamentViewPage';
 
-enum Pages {
+export enum Pages {
   Main,
   Login,
   Tournament
@@ -16,13 +16,9 @@ function App() {
     return (
       <div className="App">        
         <MainPage
-          whenUserWantLogIn={() => {
-            setActualPage(Pages.Login);
-            console.log(actualPage);
-          }}
-          whenUserWantRegister={() => {
-            setActualPage(Pages.Login);
-          }}
+          whenUserWantLogIn={() => { setActualPage(Pages.Login); }}
+          whenUserWantRegister={() => { setActualPage(Pages.Login); }}
+          goToOneTournamentInformation={() => { setActualPage(Pages.Tournament) }}
         />
       </div>
     );
@@ -39,7 +35,9 @@ function App() {
   if(actualPage===Pages.Tournament){
     return (
       <div className="App">        
-        <TournamentViewPage/>
+        <TournamentViewPage
+          goToMainPage={()=>{setActualPage(Pages.Main)}}
+        />
       </div>
     );
   }

@@ -7,6 +7,7 @@ import TournamentTilesList from './TournamentTilesList';
 interface Props {
   whenUserWantLogIn: () => void;
   whenUserWantRegister: () => void;
+  goToOneTournamentInformation: () => void;
 }
 
 const MainPage = (props: Props) => {
@@ -44,7 +45,10 @@ const MainPage = (props: Props) => {
           <button onClick={handleButtonLogIn}>Zaloguj się</button>
           <button onClick={handleButtonRegister}>Zarejestruj się</button>
         </div>
-        <TournamentTilesList tournaments={tournaments}/>
+        <TournamentTilesList 
+          tournaments={tournaments}
+          goToOneTournamentInformation={props.goToOneTournamentInformation} 
+        />
       </div>
     );
   }

@@ -1,9 +1,16 @@
 import React from 'react';
 
-const TournamentViewPage = () => {
+interface Props {
+  goToMainPage: ()=>void;
+}
+
+const TournamentViewPage = (props: Props) => {
   return (
     <div>
-      
+      <div>
+        <button onClick={props.goToMainPage}>Wróć do strony głównej</button>
+      </div>
+      Turniej numer: {"?"} !
     </div>
   );
 }

@@ -5,9 +5,10 @@ import TournamentTile from './TournamentTile';
 interface Props {
   tournaments: ITournament[] | undefined;
   pagination?: boolean;
+  goToOneTournamentInformation: () => void;
 }
 
-const TournamentTilesList = ({tournaments, pagination} : Props) => {
+const TournamentTilesList = ({tournaments, pagination, goToOneTournamentInformation} : Props) => {
   const [tournamentTiles, setTournamentTiles] = useState<any>();
   
   useEffect( () => {
@@ -25,7 +26,7 @@ const TournamentTilesList = ({tournaments, pagination} : Props) => {
                   name={tournament.name}
                   discipline={tournament.discipline}
                   date={tournament.time}
-                  onClick={() => {}}
+                  onClick={goToOneTournamentInformation}
                 />
               </ul>
             )
