@@ -7,7 +7,7 @@ import TournamentTilesList from './TournamentTilesList';
 interface Props {
   whenUserWantLogIn: () => void;
   whenUserWantRegister: () => void;
-  goToOneTournamentInformation: () => void;
+  goToOneTournamentInformation: (tournament: ITournament) => void;
 }
 
 const MainPage = (props: Props) => {

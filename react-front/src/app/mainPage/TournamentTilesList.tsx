@@ -5,7 +5,7 @@ import TournamentTile from './TournamentTile';
 interface Props {
   tournaments: ITournament[] | undefined;
   pagination?: boolean;
-  goToOneTournamentInformation: () => void;
+  goToOneTournamentInformation: (tournament: ITournament) => void;
 }
 
 const TournamentTilesList = ({tournaments, pagination, goToOneTournamentInformation} : Props) => {
@@ -26,7 +26,7 @@ const TournamentTilesList = ({tournaments, pagination, goToOneTournamentInformat
                   name={tournament.name}
                   discipline={tournament.discipline}
                   date={tournament.time}
-                  onClick={goToOneTournamentInformation}
+                  onClick={()=>{goToOneTournamentInformation(tournament)}}
                 />
               </ul>
             )

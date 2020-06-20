@@ -3,6 +3,7 @@ import './App.css';
 import LoginPage from './logging/LoginPage';
 import MainPage from './mainPage/MainPage';
 import TournamentViewPage from './tournamentViewPage/TournamentViewPage';
+import { ITournament } from './Tournament';
 
 export enum Pages {
   Main,
@@ -12,13 +13,14 @@ export enum Pages {
 
 function App() {
   const [actualPage, setActualPage] = useState<Pages>(Pages.Main);
+  const [selectedTournament, setSelecetedTournament] = useState<ITournament>();
   if(actualPage===Pages.Main){
     return (
       <div className="App">        
         <MainPage
           whenUserWantLogIn={() => { setActualPage(Pages.Login); }}
           whenUserWantRegister={() => { setActualPage(Pages.Login); }}
-          goToOneTournamentInformation={() => { setActualPage(Pages.Tournament) }}
+          goToOneTournamentInformation={(tournament) => { setSelecetedTournament(tournament); setActualPage(Pages.Tournament) }}
         />
       </div>
     );
@@ -36,6 +38,7 @@ function App() {
     return (
       <div className="App">        
         <TournamentViewPage
+          tournament={selectedTournament}
           goToMainPage={()=>{setActualPage(Pages.Main)}}
         />
       </div>
