@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios'
 import useFormInput from '../../ownHooks/UseFormInput';
 
 interface Props{
@@ -11,10 +12,27 @@ const RegistrationPage = (props: Props) => {
     const emailInput = useFormInput("");
     const passwordInput = useFormInput("");
 
+    const registerUser = () => {
+        const user = {
+            name: String(nameInput.value),
+            surname: String(surnameInput.value),
+            email: String(emailInput.value),
+            password: String(passwordInput.value),
+            accountActivated: "true" //TODO
+        }
+        
+        axios.post("http://localhost:8080/api/users/add", user)
+            .then( response => {
+                console.log(response.data);
+            })
+            .catch( error => {
+                console.log("Error: " + error);
+            });
+        }
+
     const handleSubmit = () => {
-        // SEND EMAIL
-        // ADD USER
-        console.log(`${nameInput.value} ${surnameInput.value} at ${emailInput.value} <<${passwordInput.value}>>`)
+        // SEND EMAIL //TODO
+        registerUser();
     }
 
     const handleBackToLogging = () => {

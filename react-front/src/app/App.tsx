@@ -14,6 +14,8 @@ export enum Pages {
 function App() {
   const [actualPage, setActualPage] = useState<Pages>(Pages.Main);
   const [selectedTournament, setSelecetedTournament] = useState<ITournament>();
+  const [loggedUser, setLoggeduser] = useState<number>(-1);
+  
   if(actualPage===Pages.Main){
     return (
       <div className="App">        

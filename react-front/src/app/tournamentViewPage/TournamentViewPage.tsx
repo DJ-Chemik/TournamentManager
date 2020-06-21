@@ -7,6 +7,15 @@ interface Props {
 }
 
 const TournamentViewPage = ({tournament, goToMainPage}: Props) => {
+
+  const handleClickSignUpForTournament = () => {
+
+  }
+  
+  const handleClickEditTournament = () => {
+    
+  }
+
   return (
     <div>
       <div>
@@ -14,6 +23,10 @@ const TournamentViewPage = ({tournament, goToMainPage}: Props) => {
       </div>
       <div>
         Turniej numer {tournament?.id}
+      </div>
+      <div>
+        <button onClick={handleClickSignUpForTournament}>Zapisz się na turniej</button>
+        <button onClick={handleClickEditTournament}>Edytuj informacje o turnieju</button>
       </div>
       <div>
         Nazwa: {tournament?.name} <br/>
@@ -25,6 +38,9 @@ const TournamentViewPage = ({tournament, goToMainPage}: Props) => {
       <div>
         Liczba zgłoszonych uczestników: {tournament?.seededPlayers} / {tournament?.maxParticipants} <br/>
         Możliwość składania zgłoszeń do: {tournament?.lastDayOfApplications}  
+      </div>
+      <div style={{backgroundColor: "red"}}>
+        Loga sponsorów: @TODO
       </div>
     </div>
   );

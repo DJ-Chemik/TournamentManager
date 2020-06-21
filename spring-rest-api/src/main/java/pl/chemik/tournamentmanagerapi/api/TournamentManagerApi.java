@@ -58,6 +58,21 @@ public class TournamentManagerApi {
         return userManager.findById(id);
     }
 
+    @PostMapping("/users/add")
+    public User addUser(@RequestBody User user){
+        return userManager.save(user);
+    }
+
+    @PutMapping("/users/update")
+    public User updateUser(@RequestBody User user){
+        return userManager.save(user);
+    }
+
+    @DeleteMapping("/users/delete")
+    public void deleteUser(@RequestParam Long id){
+        userManager.deleteById(id);
+    }
+
     @GetMapping
     public String getTestText(){
         return "Witaj w Managerze Turniejów!";
