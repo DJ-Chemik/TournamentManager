@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { User } from './logging/User';
 
 export interface ITournament {
     id: number,
@@ -10,15 +11,6 @@ export interface ITournament {
     maxParticipants: number,
     lastDayOfApplications: Date,
     seededPlayers: number
-}
-
-interface User {
-  id: number,
-  name: string,
-  surname: string,
-  email: string,
-  password: string,
-  accountActivated: boolean
 }
 
 const Tournament = (tournament: ITournament) => {
