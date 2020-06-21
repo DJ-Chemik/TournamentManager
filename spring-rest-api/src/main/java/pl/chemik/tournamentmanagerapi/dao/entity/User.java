@@ -1,6 +1,7 @@
 package pl.chemik.tournamentmanagerapi.dao.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="users", schema = "public")
@@ -14,6 +15,8 @@ public class User {
     private String email;
     private String password;
     private Boolean isAccountActivated;
+//    @OneToMany(mappedBy = "organizer")
+//    private List<Tournament> organizedTournaments;
 
     public User(Long id, String name, String surname, String email, String password, Boolean isAccountActivated) {
         this.id = id;
@@ -75,4 +78,12 @@ public class User {
     public void setAccountActivated(Boolean accountActivated) {
         isAccountActivated = accountActivated;
     }
+
+//    public List<Tournament> getOrganizedTournaments() {
+//        return organizedTournaments;
+//    }
+//
+//    public void setOrganizedTournaments(List<Tournament> organizedTournaments) {
+//        this.organizedTournaments = organizedTournaments;
+//    }
 }

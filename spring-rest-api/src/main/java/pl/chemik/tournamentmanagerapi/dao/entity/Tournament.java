@@ -15,6 +15,8 @@ public class Tournament {
     private String name;
     private String discipline;
     private LocalDate time;
+    @ManyToOne
+    private User organizer;
     private String googleMap;
     private Integer maxParticipants;
     private LocalDate lastDayOfApplications;
@@ -66,6 +68,14 @@ public class Tournament {
 
     public void setTime(LocalDate time) {
         this.time = time;
+    }
+
+    public User getOrganizer() {
+        return organizer;
+    }
+
+    public void setOrganizer(User organizer) {
+        this.organizer = organizer;
     }
 
     public String getGoogleMap() {

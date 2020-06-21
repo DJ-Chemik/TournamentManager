@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import pl.chemik.tournamentmanagerapi.dao.UserRepo;
 import pl.chemik.tournamentmanagerapi.dao.entity.User;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -35,10 +36,12 @@ public class UserManager {
         userRepo.deleteById(id);
     }
 
-    @EventListener(ApplicationReadyEvent.class)
-    public void fillDataBase(){
-        save(new User(
-           1L, "Szymon", "Szczepański", "szymonsz@wp.pl", "secret", false
-        ));
-    }
+//    @EventListener(ApplicationReadyEvent.class)
+//    public void fillDataBase(){
+//        User user1 = new User(
+//                1L, "Szymon", "Szczepański", "szymonsz@wp.pl", "secret", false
+//        );
+//        user1.setOrganizedTournaments(new ArrayList<>());
+//        save(user1);
+//    }
 }
