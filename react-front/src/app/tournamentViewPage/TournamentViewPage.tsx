@@ -31,7 +31,7 @@ const TournamentViewPage = ({tournament, goToMainPage}: Props) => {
       <div>
         Nazwa: {tournament?.name} <br/>
         Dyscyplina: {tournament?.discipline} <br/>
-        <div style={{backgroundColor: "red"}}>Organizator: @TODO</div> <br/>
+        Organizator: {tournament?.organizer.name} {tournament?.organizer.surname}<br/>
         Data rozgrywania: {tournament?.time} <br/>
         Google Map: {tournament?.googleMap} <br/>
       </div>

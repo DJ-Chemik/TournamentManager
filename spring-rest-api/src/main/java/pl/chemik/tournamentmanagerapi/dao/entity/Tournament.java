@@ -15,7 +15,8 @@ public class Tournament {
     private String name;
     private String discipline;
     private LocalDate time;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
     private User organizer;
     private String googleMap;
     private Integer maxParticipants;

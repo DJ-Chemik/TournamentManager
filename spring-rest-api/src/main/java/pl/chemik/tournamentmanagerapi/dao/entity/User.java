@@ -15,7 +15,11 @@ public class User {
     private String email;
     private String password;
     private Boolean isAccountActivated;
-//    @OneToMany(mappedBy = "organizer")
+//    @OneToMany(
+//            mappedBy = "organizer"
+//            cascade = CascadeType.DETACH,
+//            orphanRemoval = true
+//    )
 //    private List<Tournament> organizedTournaments;
 
     public User(Long id, String name, String surname, String email, String password, Boolean isAccountActivated) {

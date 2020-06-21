@@ -105,6 +105,7 @@ public class TournamentManagerApi {
 //        user1.setOrganizedTournaments(tournaments);
 
         tournament1.setOrganizer(user1);
+        tournament2.setOrganizer(user1);
         userManager.save(user1);
         tournamentManager.save(tournament1);
         tournamentManager.save(tournament2);

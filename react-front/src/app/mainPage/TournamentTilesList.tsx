@@ -26,7 +26,7 @@ const TournamentTilesList = ({tournaments, pagination, goToOneTournamentInformat
                   name={tournament.name}
                   discipline={tournament.discipline}
                   date={tournament.time}
-                  onClick={()=>{goToOneTournamentInformation(tournament)}}
+                  onClick={()=>{ goToOneTournamentInformation(tournament)}}
                 />
               </ul>
             )

@@ -22,7 +22,7 @@ const MainPage = (props: Props) => {
       "method": "GET",
       "url": "http://localhost:8080/api/tournaments",
     })
-    .then((response) => {
+    .then( (response) => {
       setTournaments(response.data);
     })
     .catch((error) => {
