@@ -58,6 +58,7 @@ function App() {
       <div className="App">        
         <CreateTournament
           goToMainPage={()=>{setActualPage(Pages.Main)}}
+          loggedUser={loggedUser}
         />
       </div>
     );

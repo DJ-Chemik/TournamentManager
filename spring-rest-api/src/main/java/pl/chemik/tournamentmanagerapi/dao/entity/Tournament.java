@@ -40,6 +40,18 @@ public class Tournament {
         this.seededPlayers = seededPlayers;
     }
 
+    public static class TournamentInput {
+        public String name;
+        public String discipline;
+        public LocalDate time;
+        public Long organizer;
+        public String googleMap;
+        public int seededPlayers;
+        public int maxParticipants;
+        public LocalDate lastDayOfApplications;
+
+    }
+
     public Tournament() {
     }
 

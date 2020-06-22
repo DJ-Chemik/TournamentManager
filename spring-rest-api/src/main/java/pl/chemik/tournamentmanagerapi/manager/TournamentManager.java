@@ -38,6 +38,20 @@ public class TournamentManager {
         return tournamentRepo.save(tournament);
     }
 
+    public Tournament save(Tournament.TournamentInput ti){
+        Tournament tournament = new Tournament();
+        tournament.setName(ti.name);
+        tournament.setDiscipline(ti.discipline);
+        tournament.setTime(ti.time);
+        User organizer  = userRepo.findById(ti.organizer).get();
+        tournament.setOrganizer(organizer);
+        tournament.setLastDayOfApplications(ti.lastDayOfApplications);
+        tournament.setGoogleMap(ti.googleMap);
+        tournament.setMaxParticipants(ti.maxParticipants);
+        tournament.setSeededPlayers(ti.seededPlayers);
+        return tournamentRepo.save(tournament);
+    }
+
     public void deleteById(Long id){
         tournamentRepo.deleteById(id);
     }

@@ -1,8 +1,10 @@
 import React from 'react';
+import axios from 'axios';
 import useFormInput from '../../ownHooks/UseFormInput';
 
 interface Props {
     goToMainPage: ()=>void;
+    loggedUser: number;
 }
 
 const CreateTournament = (props: Props) => {
@@ -23,9 +25,31 @@ const CreateTournament = (props: Props) => {
         return false;
     }
 
+    const createTournament = () => {
+        const tournament = {
+            name: String(nameInput.value),
+            discipline: String(disciplineInput.value),
+            time: dateInput.value,
+            organizer: props.loggedUser,
+            googleMap: String(placeInput.value),
+            seededPlayers: 0,
+            maxParticipants: maxPartiicipantsInput.value,
+
+        }
+        
+        axios.post("http://localhost:8080/api/tournaments/add", tournament)
+            .then( response => {
+                console.log(response.data);
+            })
+            .catch( error => {
+                console.log("Error: " + error);
+            });
+    }
+
     const handleSubmit = () => {
         if(checkAllFieldsNotEmpty()){
-
+            createTournament();
+            props.goToMainPage();
         }
     }
 

@@ -25,12 +25,12 @@ public class TournamentManagerApi {
     }
 
     @GetMapping("/tournaments")
-    public Iterable<Tournament> getAllTournaments(){
+    public Iterable<Tournament> getAllTournaments() {
         return tournamentManager.findAll();
     }
 
     @GetMapping("/tournament/participants")
-    public Iterable<User> getUsersFromTournaments(@RequestParam Long id){
+    public Iterable<User> getUsersFromTournaments(@RequestParam Long id) {
         return tournamentManager.findById(id).get().getParticipants();
     }
 
@@ -39,23 +39,25 @@ public class TournamentManagerApi {
         return tournamentManager.findById(id);
     }
 
+
+
     @PostMapping("/tournaments/add")
-    public Tournament addTournament(@RequestBody Tournament tournament){
-        return tournamentManager.save(tournament);
+    public Tournament addTournament(@RequestBody Tournament.TournamentInput ti) {
+        return tournamentManager.save(ti);
     }
 
     @PutMapping("/tournaments/update")
-    public Tournament updateTournament(@RequestBody Tournament tournament){
+    public Tournament updateTournament(@RequestBody Tournament.TournamentInput tournament) {
         return tournamentManager.save(tournament);
     }
 
     @DeleteMapping("/tournaments/delete")
-    public void deleteTournaments(@RequestParam Long id){
+    public void deleteTournaments(@RequestParam Long id) {
         tournamentManager.deleteById(id);
     }
 
     @GetMapping("/users")
-    public Iterable<User> getAllUsers(){
+    public Iterable<User> getAllUsers() {
         return userManager.findAll();
     }
 
@@ -70,22 +72,22 @@ public class TournamentManagerApi {
 //    }
 
     @GetMapping("/user")
-    public Optional<User> getOneUserById(@RequestParam Long id){
+    public Optional<User> getOneUserById(@RequestParam Long id) {
         return userManager.findById(id);
     }
 
     @PostMapping("/users/add")
-    public User addUser(@RequestBody User user){
+    public User addUser(@RequestBody User user) {
         return userManager.save(user);
     }
 
     @PutMapping("/users/update")
-    public User updateUser(@RequestBody User user){
+    public User updateUser(@RequestBody User user) {
         return userManager.save(user);
     }
 
     @DeleteMapping("/users/delete")
-    public void deleteUser(@RequestParam Long id){
+    public void deleteUser(@RequestParam Long id) {
         userManager.deleteById(id);
     }
 
@@ -95,13 +97,13 @@ public class TournamentManagerApi {
     }
 
     @PostMapping("/users/login")
-    public Long checkIsLoginDataAreCorrect(@RequestBody LoginData loginData){
+    public Long checkIsLoginDataAreCorrect(@RequestBody LoginData loginData) {
         Iterable<User> usersIt = userManager.findAll();
         for (User user : usersIt) {
-            if (user.getEmail().equals(loginData.email)){
-                if (user.getPassword().equals(loginData.password)){
+            if (user.getEmail().equals(loginData.email)) {
+                if (user.getPassword().equals(loginData.password)) {
                     return user.getId();
-                }else{
+                } else {
                     return -1L;
                 }
             }
@@ -111,12 +113,12 @@ public class TournamentManagerApi {
     }
 
     @GetMapping
-    public String getTestText(){
+    public String getTestText() {
         return "Witaj w Managerze Turniejów!";
     }
 
     @GetMapping("/initializedatabase")
-    public boolean initializeDatabase(){
+    public boolean initializeDatabase() {
         User user1 = new User(
                 1L, "Szymon", "Szczepański", "szymonsz@wp.pl", "secret", true
         );
