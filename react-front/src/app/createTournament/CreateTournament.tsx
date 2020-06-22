@@ -15,12 +15,22 @@ const CreateTournament = (props: Props) => {
     const placeInput = useFormInput("");
     const maxPartiicipantsInput = useFormInput("");
 
-    const checkAllFieldsNotEmpty = () => {
+    const checkAreAllFieldsCorrect = () => {        
         if(nameInput.value && disciplineInput.value &&
             dateInput.value && lastDayInput.value &&
             placeInput.value && maxPartiicipantsInput.value){
-
-                return true;
+                let currectDate = new Date();
+                currectDate.setHours(23,59);
+                let tournamentDate = new Date(dateInput.value);
+                let lastDayOfApplication = new Date(lastDayInput.value);
+                if(tournamentDate >= currectDate && 
+                    lastDayOfApplication >= currectDate &&
+                    tournamentDate >= lastDayOfApplication){
+                    return true;
+                }else{
+                    console.log("Wprowadź prawidłowe daty");
+                    return false;
+                }
         }
         return false;
     }
@@ -47,7 +57,7 @@ const CreateTournament = (props: Props) => {
     }
 
     const handleSubmit = () => {
-        if(checkAllFieldsNotEmpty()){
+        if(checkAreAllFieldsCorrect()){
             createTournament();
             props.goToMainPage();
         }
