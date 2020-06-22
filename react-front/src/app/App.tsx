@@ -45,6 +45,7 @@ function App() {
         <TournamentViewPage
           tournament={selectedTournament}
           goToMainPage={()=>{setActualPage(Pages.Main)}}
+          loggedUser={loggedUser}
         />
       </div>
     );

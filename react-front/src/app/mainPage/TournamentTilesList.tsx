@@ -11,12 +11,7 @@ interface Props {
 const TournamentTilesList = ({tournaments, pagination, goToOneTournamentInformation} : Props) => {
   const [tournamentTiles, setTournamentTiles] = useState<any>();
   
-  useEffect( () => {
-    const tmp = initializeListFromProps();
-    setTournamentTiles(tmp);
-  }, [tournaments]);
-  
-  const initializeListFromProps = () => {
+  const initializeListFromProps = React.useCallback( () => {
     if(tournaments){
       return(
         tournaments.map( (tournament: ITournament) => {
@@ -35,7 +30,14 @@ const TournamentTilesList = ({tournaments, pagination, goToOneTournamentInformat
       );
     }
     return null;
-  }
+  },[goToOneTournamentInformation, tournaments])
+
+  useEffect( () => {
+    const tmp = initializeListFromProps();
+    setTournamentTiles(tmp);
+  }, [tournaments, initializeListFromProps]);
+  
+  
   
   return (
     <div>

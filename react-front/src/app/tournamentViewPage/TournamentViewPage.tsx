@@ -4,6 +4,7 @@ import { ITournament } from '../Tournament';
 interface Props {
   tournament?: ITournament;
   goToMainPage: ()=>void;
+  loggedUser: number;
 }
 
 const TournamentViewPage = ({tournament, goToMainPage}: Props) => {

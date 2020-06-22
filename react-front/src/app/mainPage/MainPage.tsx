@@ -17,10 +17,6 @@ const MainPage = (props: Props) => {
   const [userName, setUserName] = useState<string>("");
   const [userSurname, setUserSurname] = useState<string>("");
 
-  useEffect( () => {
-    fetchTournamentsDataFromApi();
-  }, [])
-
   const fetchTournamentsDataFromApi = React.useCallback( () => {
     axios({
       "method": "GET",
@@ -34,6 +30,12 @@ const MainPage = (props: Props) => {
     })
   }, [])
 
+
+  useEffect( () => {
+    fetchTournamentsDataFromApi();
+  }, [fetchTournamentsDataFromApi])
+
+  
   const handleButtonLogIn = () => {
     props.whenUserWantLogIn();
   }
