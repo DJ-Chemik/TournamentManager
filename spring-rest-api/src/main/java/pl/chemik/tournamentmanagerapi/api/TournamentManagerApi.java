@@ -76,6 +76,30 @@ public class TournamentManagerApi {
         userManager.deleteById(id);
     }
 
+    private static class LoginData {
+        public String email;
+        public String password;
+    }
+
+    @PostMapping("/users/login")
+    public boolean checkIsLoginDataAreCorrect(@RequestBody LoginData loginData){
+        Iterable<User> usersIt = userManager.findAll();
+        System.out.println("L: " + loginData.email + "| H: " + loginData.password);
+        for (User user : usersIt) {
+            System.out.println("L: " + user.getEmail() + "| H: " + user.getPassword());
+            if (user.getEmail().equals(loginData.email)){
+                System.out.println("IF");
+                if (user.getPassword().equals(loginData.password)){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+
+        return false;
+    }
+
     @GetMapping
     public String getTestText(){
         return "Witaj w Managerze Turniejów!";
@@ -86,8 +110,9 @@ public class TournamentManagerApi {
         User user1 = new User(
                 1L, "Szymon", "Szczepański", "szymonsz@wp.pl", "secret", true
         );
-//        user1.setOrganizedTournaments(new ArrayList<>());
-
+        User user2 = new User(
+                2L, "Marek", "Marecki", "marek321@o2.pl", "marzenka", true
+        );
 
         Tournament tournament1 = new Tournament(
                 1L, "Pierwszy Turniej", "LOL",
@@ -99,16 +124,20 @@ public class TournamentManagerApi {
                 LocalDate.of(2020, 10, 07), "Poznań",
                 30, LocalDate.of(2020, 10, 01), 15
         );
-//        User user1 = userRepo.findById(1L).get();
-//        List<Tournament> tournaments = new ArrayList<>(user1.getOrganizedTournaments());
-//        tournaments.add(tournament1);
-//        user1.setOrganizedTournaments(tournaments);
+        Tournament tournament3 = new Tournament(
+                3L, "Turniej 3 skoczni", "Skoki",
+                LocalDate.of(2020, 12, 27), "Zakopane",
+                15, LocalDate.of(2020, 11, 30), 12
+        );
 
         tournament1.setOrganizer(user1);
-        tournament2.setOrganizer(user1);
+        tournament2.setOrganizer(user2);
+        tournament3.setOrganizer(user1);
         userManager.save(user1);
+        userManager.save(user2);
         tournamentManager.save(tournament1);
         tournamentManager.save(tournament2);
+        tournamentManager.save(tournament3);
 
 
         return true;

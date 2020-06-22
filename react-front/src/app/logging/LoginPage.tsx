@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import useFormInput from '../../ownHooks/UseFormInput';
 import RegistrationPage from './RegistrationPage';
 
@@ -11,8 +12,26 @@ const LoginPage = (props: Props) => {
     const passwordInput = useFormInput("");
     const [wantRegister, setWantRegister] = React.useState<boolean>(false);
 
+
+    const logUser = () => {
+        const user = {
+            email: String(emailInput.value),
+            password: String(passwordInput.value),
+        }
+        
+        axios.post("http://localhost:8080/api/users/login", user)
+            .then( response => {
+                console.log(response.data);
+            })
+            .catch( error => {
+                console.log("Error: " + error);
+            });
+    }
+
     const handleSubmit = () => {
-      console.log(`Logged: ${emailInput.value} <<${passwordInput.value}>>`)
+      if(emailInput.value && passwordInput.value){
+
+      }
     }
 
     const handleClickMissPassword = () => {
