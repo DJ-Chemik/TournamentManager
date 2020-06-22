@@ -14,6 +14,8 @@ interface Props {
 
 const MainPage = (props: Props) => {
   const [tournaments, setTournaments] = useState<ITournament[] | undefined>();
+  const [userName, setUserName] = useState<string>("");
+  const [userSurname, setUserSurname] = useState<string>("");
 
   useEffect( () => {
     fetchTournamentsDataFromApi();
@@ -44,17 +46,31 @@ const MainPage = (props: Props) => {
     props.whenUserWantRegister();
   }
 
-  const getActualLoggedUser = () => {
-    
+  const getInformationAboutActualUser = () => {
+     axios({
+      "method": "GET",
+      "url": "http://localhost:8080/api/user",
+      "params": {
+        id: props.loggedUser
+      }
+    })
+    .then( (response) => {
+      setUserName(response.data.name);
+      setUserSurname(response.data.surname);
+    })
+    .catch((error) => {
+      console.log("Error: " + error);
+    })
     
   }
 
   if(tournaments){
-    const logged = "Aktualnie zalogowany użytkownik: ";
+    const logged = "Jesteś zalogowany jako: ";
     const nonLogged = "Nie jesteś jeszcze zalogowany :<";
     let result;
+    getInformationAboutActualUser();    
     if (props.loggedUser!==-1) {
-          result = logged + props.loggedUser;
+          result = logged + userName + " " + userSurname + " ";
           return (
             <div>
               <div>
