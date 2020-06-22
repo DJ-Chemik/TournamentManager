@@ -2,6 +2,7 @@ package pl.chemik.tournamentmanagerapi.dao.entity;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="users", schema = "public")
@@ -15,12 +16,19 @@ public class User {
     private String email;
     private String password;
     private Boolean isAccountActivated;
-//    @OneToMany(
+//    @OneToMany//(
 //            mappedBy = "organizer"
 //            cascade = CascadeType.DETACH,
 //            orphanRemoval = true
 //    )
-//    private List<Tournament> organizedTournaments;
+//    private Set<Tournament> organizedTournaments;
+//    @ManyToMany
+//    @JoinTable(
+//            name = "user_tournament"
+////            joinColumns = @JoinColumn(name = "user_id"),
+////            inverseJoinColumns = @JoinColumn(name = "tournament_id")
+//    )
+//    private Set<Tournament> participatedTournaments;
 
     public User(Long id, String name, String surname, String email, String password, Boolean isAccountActivated) {
         this.id = id;
@@ -83,11 +91,22 @@ public class User {
         isAccountActivated = accountActivated;
     }
 
-//    public List<Tournament> getOrganizedTournaments() {
+//    public Set<Tournament> getOrganizedTournaments() {
 //        return organizedTournaments;
 //    }
 //
-//    public void setOrganizedTournaments(List<Tournament> organizedTournaments) {
+//    public void setOrganizedTournaments(Set<Tournament> organizedTournaments) {
 //        this.organizedTournaments = organizedTournaments;
 //    }
+//
+//
+//    public Set<Tournament> getParticipatedTournaments() {
+//        return participatedTournaments;
+//    }
+//
+//    public void setParticipatedTournaments(Set<Tournament> participatedTournaments) {
+//        this.participatedTournaments = participatedTournaments;
+//    }
+
+
 }

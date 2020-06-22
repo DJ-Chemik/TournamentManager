@@ -8,6 +8,7 @@ interface Props {
   whenUserWantLogIn: () => void;
   whenUserWantLogOut: () => void;
   whenUserWantRegister: () => void;
+  whenUserWantOrganizeTournament: () => void
   goToOneTournamentInformation: (tournament: ITournament) => void;
   loggedUser: number;
 }
@@ -48,6 +49,10 @@ const MainPage = (props: Props) => {
     props.whenUserWantRegister();
   }
 
+  const handleButtonOrganizeTournament = () => {
+    props.whenUserWantOrganizeTournament();
+  }
+
   const getInformationAboutActualUser = () => {
      axios({
       "method": "GET",
@@ -76,6 +81,7 @@ const MainPage = (props: Props) => {
           return (
             <div>
               <div>
+                <button onClick={handleButtonOrganizeTournament}>Zorganizuj własny turniej</button>
                 {result}
                 <button onClick={handleButtonLogOut}>Wyloguj się</button>
               </div>

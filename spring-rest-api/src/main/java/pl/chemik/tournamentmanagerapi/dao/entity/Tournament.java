@@ -4,6 +4,8 @@ import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="tournamnets", schema = "public")
@@ -19,9 +21,11 @@ public class Tournament {
     @JoinColumn(name = "user_id")
     private User organizer;
     private String googleMap;
+    private Integer seededPlayers;
     private Integer maxParticipants;
     private LocalDate lastDayOfApplications;
-    private Integer seededPlayers;
+    @ManyToMany//(mappedBy = "participatedTournaments")
+    private List<User> participants;
 
     public Tournament(Long id, String name, String discipline, LocalDate time,
                       String googleMap, Integer maxParticipants, LocalDate lastDayOfApplications,
@@ -109,5 +113,22 @@ public class Tournament {
 
     public void setSeededPlayers(Integer seededPlayers) {
         this.seededPlayers = seededPlayers;
+    }
+
+//    public Set<User> getParticipants() {
+//        return participants;
+//    }
+//
+//    public void setParticipants(Set<User> participants) {
+//        this.participants = participants;
+//    }
+
+
+    public List<User> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<User> participants) {
+        this.participants = participants;
     }
 }

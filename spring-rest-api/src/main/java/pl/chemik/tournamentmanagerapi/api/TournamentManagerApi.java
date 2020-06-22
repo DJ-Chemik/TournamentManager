@@ -8,9 +8,7 @@ import pl.chemik.tournamentmanagerapi.manager.TournamentManager;
 import pl.chemik.tournamentmanagerapi.manager.UserManager;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -29,6 +27,11 @@ public class TournamentManagerApi {
     @GetMapping("/tournaments")
     public Iterable<Tournament> getAllTournaments(){
         return tournamentManager.findAll();
+    }
+
+    @GetMapping("/tournament/participants")
+    public Iterable<User> getUsersFromTournaments(@RequestParam Long id){
+        return tournamentManager.findById(id).get().getParticipants();
     }
 
     @GetMapping("/tournament")
@@ -55,6 +58,16 @@ public class TournamentManagerApi {
     public Iterable<User> getAllUsers(){
         return userManager.findAll();
     }
+
+//    @GetMapping("/user/participates")
+//    public Iterable<Tournament> getParticipatesTournamentForUser(@RequestParam Long id){
+//        return userManager.findById(id).get().getParticipatedTournaments();
+//    }
+//
+//    @GetMapping("/user/organized")
+//    public Iterable<Tournament> getOrganizedTournamentForUser(@RequestParam Long id){
+//        return userManager.findById(id).get().getOrganizedTournaments();
+//    }
 
     @GetMapping("/user")
     public Optional<User> getOneUserById(@RequestParam Long id){
@@ -103,7 +116,7 @@ public class TournamentManagerApi {
     }
 
     @GetMapping("/initializedatabase")
-    public boolean addUserByGet(){
+    public boolean initializeDatabase(){
         User user1 = new User(
                 1L, "Szymon", "Szczepański", "szymonsz@wp.pl", "secret", true
         );
@@ -130,12 +143,21 @@ public class TournamentManagerApi {
         tournament1.setOrganizer(user1);
         tournament2.setOrganizer(user2);
         tournament3.setOrganizer(user1);
+//        Set<User> participants = new HashSet<>();
+        List<User> participants = new ArrayList<>();
+        participants.add(user1);
+        tournament1.setParticipants(participants);
+
+//        Set<User> participants2 = new HashSet<>();
+        List<User> participants2 = new ArrayList<>();
+        participants2.add(user1);
+        participants2.add(user2);
+        tournament2.setParticipants(participants2);
         userManager.save(user1);
         userManager.save(user2);
         tournamentManager.save(tournament1);
         tournamentManager.save(tournament2);
         tournamentManager.save(tournament3);
-
 
         return true;
     }

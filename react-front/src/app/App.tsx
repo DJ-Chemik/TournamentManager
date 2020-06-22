@@ -4,11 +4,13 @@ import LoginPage from './logging/LoginPage';
 import MainPage from './mainPage/MainPage';
 import TournamentViewPage from './tournamentViewPage/TournamentViewPage';
 import { ITournament } from './Tournament';
+import CreateTournament from './createTournament/CreateTournament';
 
 export enum Pages {
   Main,
   Login,
-  Tournament
+  Tournament,
+  CreateTournament
 }
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
           whenUserWantLogIn={() => { setActualPage(Pages.Login); }}
           whenUserWantLogOut={() => { setLoggeduser(-1); }}
           whenUserWantRegister={() => { setActualPage(Pages.Login); }}
+          whenUserWantOrganizeTournament={() => { setActualPage(Pages.CreateTournament); }}
           goToOneTournamentInformation={(tournament) => { setSelecetedTournament(tournament); setActualPage(Pages.Tournament) }}
           loggedUser={loggedUser}
         />
@@ -46,6 +49,15 @@ function App() {
           tournament={selectedTournament}
           goToMainPage={()=>{setActualPage(Pages.Main)}}
           loggedUser={loggedUser}
+        />
+      </div>
+    );
+  }
+  if(actualPage===Pages.CreateTournament){
+    return (
+      <div className="App">        
+        <CreateTournament
+          goToMainPage={()=>{setActualPage(Pages.Main)}}
         />
       </div>
     );
