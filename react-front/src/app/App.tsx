@@ -21,6 +21,7 @@ function App() {
       <div className="App">        
         <MainPage
           whenUserWantLogIn={() => { setActualPage(Pages.Login); }}
+          whenUserWantLogOut={() => { setLoggeduser(-1); }}
           whenUserWantRegister={() => { setActualPage(Pages.Login); }}
           goToOneTournamentInformation={(tournament) => { setSelecetedTournament(tournament); setActualPage(Pages.Tournament) }}
           loggedUser={loggedUser}

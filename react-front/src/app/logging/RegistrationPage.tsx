@@ -33,6 +33,7 @@ const RegistrationPage = (props: Props) => {
     const handleSubmit = () => {
         // SEND EMAIL //TODO
         registerUser();
+        props.backToLogging();
     }
 
     const handleBackToLogging = () => {

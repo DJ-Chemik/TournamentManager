@@ -6,6 +6,7 @@ import TournamentTilesList from './TournamentTilesList';
 
 interface Props {
   whenUserWantLogIn: () => void;
+  whenUserWantLogOut: () => void;
   whenUserWantRegister: () => void;
   goToOneTournamentInformation: (tournament: ITournament) => void;
   loggedUser: number;
@@ -36,7 +37,7 @@ const MainPage = (props: Props) => {
   }
 
   const handleButtonLogOut = () => {
-    
+    props.whenUserWantLogOut();
   }
 
   const handleButtonRegister = () => {
@@ -54,23 +55,35 @@ const MainPage = (props: Props) => {
     let result;
     if (props.loggedUser!==-1) {
           result = logged + props.loggedUser;
+          return (
+            <div>
+              <div>
+                {result}
+                <button onClick={handleButtonLogOut}>Wyloguj się</button>
+              </div>
+              <TournamentTilesList 
+                tournaments={tournaments}
+                goToOneTournamentInformation={props.goToOneTournamentInformation} 
+              />
+            </div>
+          );
     }else{
         result = nonLogged;
+        return (
+          <div>
+            <div>
+                <button onClick={handleButtonLogIn}>Zaloguj się</button>
+                <button onClick={handleButtonRegister}>Zarejestruj się</button>
+                {result}
+            </div>
+            <TournamentTilesList 
+              tournaments={tournaments}
+              goToOneTournamentInformation={props.goToOneTournamentInformation} 
+            />
+          </div>
+        );
     }
-    return (
-      <div>
-        <div>
-          <button onClick={handleButtonLogIn}>Zaloguj się</button>
-          <button onClick={handleButtonRegister}>Zarejestruj się</button>
-          {result}
-          <button onClick={handleButtonLogOut}>Wyloguj się</button>
-        </div>
-        <TournamentTilesList 
-          tournaments={tournaments}
-          goToOneTournamentInformation={props.goToOneTournamentInformation} 
-        />
-      </div>
-    );
+    
   }
   return <p> LOADER </p>;
 }

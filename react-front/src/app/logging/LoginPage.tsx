@@ -34,6 +34,7 @@ const LoginPage = (props: Props) => {
     const handleSubmit = () => {
       if(emailInput.value && passwordInput.value){
         logUser();
+        props.goToMainPage();
       }
     }
 
