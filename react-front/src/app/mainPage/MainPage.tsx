@@ -8,6 +8,7 @@ interface Props {
   whenUserWantLogIn: () => void;
   whenUserWantRegister: () => void;
   goToOneTournamentInformation: (tournament: ITournament) => void;
+  loggedUser: number;
 }
 
 const MainPage = (props: Props) => {
@@ -34,16 +35,35 @@ const MainPage = (props: Props) => {
     props.whenUserWantLogIn();
   }
 
+  const handleButtonLogOut = () => {
+    
+  }
+
   const handleButtonRegister = () => {
     props.whenUserWantRegister();
   }
 
+  const getActualLoggedUser = () => {
+    
+    
+  }
+
   if(tournaments){
+    const logged = "Aktualnie zalogowany użytkownik: ";
+    const nonLogged = "Nie jesteś jeszcze zalogowany :<";
+    let result;
+    if (props.loggedUser!==-1) {
+          result = logged + props.loggedUser;
+    }else{
+        result = nonLogged;
+    }
     return (
       <div>
         <div>
           <button onClick={handleButtonLogIn}>Zaloguj się</button>
           <button onClick={handleButtonRegister}>Zarejestruj się</button>
+          {result}
+          <button onClick={handleButtonLogOut}>Wyloguj się</button>
         </div>
         <TournamentTilesList 
           tournaments={tournaments}

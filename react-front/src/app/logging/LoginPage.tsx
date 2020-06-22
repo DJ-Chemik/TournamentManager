@@ -5,6 +5,7 @@ import RegistrationPage from './RegistrationPage';
 
 interface Props {
     goToMainPage: () => void;
+    loginUser: (id: number) => void;
 }
 
 const LoginPage = (props: Props) => {
@@ -21,7 +22,9 @@ const LoginPage = (props: Props) => {
         
         axios.post("http://localhost:8080/api/users/login", user)
             .then( response => {
-                console.log(response.data);
+                if(response.data){
+                    props.loginUser(response.data);
+                }
             })
             .catch( error => {
                 console.log("Error: " + error);
@@ -30,7 +33,7 @@ const LoginPage = (props: Props) => {
 
     const handleSubmit = () => {
       if(emailInput.value && passwordInput.value){
-
+        logUser();
       }
     }
 

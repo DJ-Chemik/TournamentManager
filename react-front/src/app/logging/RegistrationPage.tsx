@@ -28,7 +28,7 @@ const RegistrationPage = (props: Props) => {
             .catch( error => {
                 console.log("Error: " + error);
             });
-        }
+    }
 
     const handleSubmit = () => {
         // SEND EMAIL //TODO

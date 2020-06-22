@@ -15,7 +15,7 @@ function App() {
   const [actualPage, setActualPage] = useState<Pages>(Pages.Main);
   const [selectedTournament, setSelecetedTournament] = useState<ITournament>();
   const [loggedUser, setLoggeduser] = useState<number>(-1);
-  
+
   if(actualPage===Pages.Main){
     return (
       <div className="App">        
@@ -23,6 +23,7 @@ function App() {
           whenUserWantLogIn={() => { setActualPage(Pages.Login); }}
           whenUserWantRegister={() => { setActualPage(Pages.Login); }}
           goToOneTournamentInformation={(tournament) => { setSelecetedTournament(tournament); setActualPage(Pages.Tournament) }}
+          loggedUser={loggedUser}
         />
       </div>
     );
@@ -32,6 +33,7 @@ function App() {
       <div className="App">        
         <LoginPage
           goToMainPage={()=>{setActualPage(Pages.Main)}}
+          loginUser={(id: number)=>{setLoggeduser(id)}}
         />
       </div>
     );

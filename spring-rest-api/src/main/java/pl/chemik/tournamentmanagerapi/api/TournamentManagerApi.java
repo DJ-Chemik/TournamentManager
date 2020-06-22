@@ -82,22 +82,19 @@ public class TournamentManagerApi {
     }
 
     @PostMapping("/users/login")
-    public boolean checkIsLoginDataAreCorrect(@RequestBody LoginData loginData){
+    public Long checkIsLoginDataAreCorrect(@RequestBody LoginData loginData){
         Iterable<User> usersIt = userManager.findAll();
-        System.out.println("L: " + loginData.email + "| H: " + loginData.password);
         for (User user : usersIt) {
-            System.out.println("L: " + user.getEmail() + "| H: " + user.getPassword());
             if (user.getEmail().equals(loginData.email)){
-                System.out.println("IF");
                 if (user.getPassword().equals(loginData.password)){
-                    return true;
+                    return user.getId();
                 }else{
-                    return false;
+                    return -1L;
                 }
             }
         }
 
-        return false;
+        return -1L;
     }
 
     @GetMapping
