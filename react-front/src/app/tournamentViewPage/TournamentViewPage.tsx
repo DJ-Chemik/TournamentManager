@@ -33,21 +33,17 @@ const TournamentViewPage = (props: Props) => {
   }
 
   const InteractionsWithTournament = () => {
-    if (props.loggedUser===props.tournament?.organizer.id) {
+    if (props.loggedUser!==-1) {
       return(
         <div>
           <button onClick={handleClickSignUpForTournament}>Zapisz się na turniej</button>
-          <button onClick={handleClickEditTournament}>Edytuj informacje o turnieju</button>
-        </div>
-      )
-    }else if(props.loggedUser!==-1){
-      return(
-        <div>
-          <button onClick={handleClickSignUpForTournament}>Zapisz się na turniej</button>
+          {
+            props.loggedUser===props.tournament?.organizer.id &&
+            <button onClick={handleClickEditTournament}>Edytuj informacje o turnieju</button>
+          }
         </div>
       )
     }
-
     return(
       <div>
         <button onClick={props.whenUserWantLogIn}>Zaloguj się aby móc zapisać się na turniej lub edytować go</button>
