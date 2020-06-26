@@ -42,8 +42,8 @@ public class TournamentManagerApi {
 
 
     @PostMapping("/tournaments/add")
-    public Tournament addTournament(@RequestBody Tournament.TournamentInput ti) {
-        return tournamentManager.save(ti);
+    public Tournament addTournament(@RequestBody Tournament.TournamentInput tournament) {
+        return tournamentManager.save(tournament);
     }
 
     @PutMapping("/tournaments/update")
@@ -110,6 +110,11 @@ public class TournamentManagerApi {
         }
 
         return -1L;
+    }
+
+    @PostMapping("/signusertotournament")
+    public boolean signUserToTournament(@RequestParam Long tournamentId, @RequestParam Long userId){
+        return tournamentManager.signUserToTournament(tournamentId, userId);
     }
 
     @GetMapping

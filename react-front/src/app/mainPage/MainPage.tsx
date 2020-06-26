@@ -3,6 +3,7 @@ import axios from 'axios'
 import './MainPage.css'
 import { ITournament } from '../Tournament';
 import TournamentTilesList from './TournamentTilesList';
+import useFormInput from '../../ownHooks/UseFormInput';
 
 interface Props {
   whenUserWantLogIn: () => void;
@@ -15,8 +16,10 @@ interface Props {
 
 const MainPage = (props: Props) => {
   const [tournaments, setTournaments] = useState<ITournament[] | undefined>();
+  const [filteredTournaments, setFilteredTournaments] = useState<ITournament[] | undefined>();
   const [userName, setUserName] = useState<string>("");
   const [userSurname, setUserSurname] = useState<string>("");
+  const searchedTextInput = useFormInput("");
 
   const fetchTournamentsDataFromApi = React.useCallback( () => {
     axios({
@@ -25,6 +28,7 @@ const MainPage = (props: Props) => {
     })
     .then( (response) => {
       setTournaments(response.data);
+      setFilteredTournaments(response.data);
     })
     .catch((error) => {
       console.log("Error: " + error);
@@ -34,6 +38,7 @@ const MainPage = (props: Props) => {
 
   useEffect( () => {
     fetchTournamentsDataFromApi();
+
   }, [fetchTournamentsDataFromApi])
 
   
@@ -62,8 +67,10 @@ const MainPage = (props: Props) => {
       }
     })
     .then( (response) => {
-      setUserName(response.data.name);
-      setUserSurname(response.data.surname);
+      if(response.data){
+        setUserName(response.data.name);
+        setUserSurname(response.data.surname);
+      }
     })
     .catch((error) => {
       console.log("Error: " + error);
@@ -71,11 +78,32 @@ const MainPage = (props: Props) => {
     
   }
 
+  const searchInTiles = () => {
+    const tmp : ITournament[] = [];
+    console.log(searchedTextInput.value);
+    if (searchedTextInput.value) {
+      tournaments?.forEach(tournament => {
+        if(tournament.name.includes(searchedTextInput.value) || 
+          tournament.discipline.includes(searchedTextInput.value)){
+            tmp.push(tournament);
+        }
+      });  
+      setFilteredTournaments(tmp);
+    }else{
+      setFilteredTournaments(tournaments);
+    }
+    console.log(searchedTextInput.value);
+  }
+
+  const deleteFilters = () => {
+    setFilteredTournaments(tournaments);
+  }
+
   if(tournaments){
     const logged = "Jesteś zalogowany jako: ";
     const nonLogged = "Nie jesteś jeszcze zalogowany :<";
     let result;
-    getInformationAboutActualUser();    
+    getInformationAboutActualUser();
     if (props.loggedUser!==-1) {
           result = logged + userName + " " + userSurname + " ";
           return (
@@ -85,9 +113,19 @@ const MainPage = (props: Props) => {
                 {result}
                 <button onClick={handleButtonLogOut}>Wyloguj się</button>
               </div>
+              <div>
+                  <input type="text" onChange={(e)=>{
+                      searchedTextInput.onChange(e);
+                      searchInTiles();
+                      console.log(filteredTournaments);
+                    }}>
+                  </input>
+                  <button onClick={deleteFilters}> Wyczyść filtry </button>
+              </div>
               <TournamentTilesList 
-                tournaments={tournaments}
+                tournaments={filteredTournaments}
                 goToOneTournamentInformation={props.goToOneTournamentInformation} 
+                pagination={true}
               />
             </div>
           );
@@ -100,8 +138,17 @@ const MainPage = (props: Props) => {
                 <button onClick={handleButtonRegister}>Zarejestruj się</button>
                 {result}
             </div>
+            <div>
+                  <input type="text" onChange={(e)=>{
+                      searchedTextInput.onChange(e);
+                      searchInTiles();
+                      console.log(filteredTournaments);
+                    }}>
+                  </input>
+                  <button onClick={deleteFilters}> Wyczyść filtry </button>
+              </div>
             <TournamentTilesList 
-              tournaments={tournaments}
+              tournaments={filteredTournaments}
               goToOneTournamentInformation={props.goToOneTournamentInformation} 
             />
           </div>

@@ -26,24 +26,24 @@ public class TournamentManager {
         this.userRepo = userRepo;
     }
 
-    public Optional<Tournament> findById(Long id){
+    public Optional<Tournament> findById(Long id) {
         return tournamentRepo.findById(id);
     }
 
-    public Iterable<Tournament> findAll(){
+    public Iterable<Tournament> findAll() {
         return tournamentRepo.findAll();
     }
 
-    public Tournament save(Tournament tournament){
+    public Tournament save(Tournament tournament) {
         return tournamentRepo.save(tournament);
     }
 
-    public Tournament save(Tournament.TournamentInput ti){
+    public Tournament save(Tournament.TournamentInput ti) {
         Tournament tournament = new Tournament();
         tournament.setName(ti.name);
         tournament.setDiscipline(ti.discipline);
         tournament.setTime(ti.time);
-        User organizer  = userRepo.findById(ti.organizer).get();
+        User organizer = userRepo.findById(ti.organizer).get();
         tournament.setOrganizer(organizer);
         tournament.setLastDayOfApplications(ti.lastDayOfApplications);
         tournament.setGoogleMap(ti.googleMap);
@@ -52,8 +52,32 @@ public class TournamentManager {
         return tournamentRepo.save(tournament);
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         tournamentRepo.deleteById(id);
+    }
+
+    public boolean signUserToTournament(Long tournamentId, Long userId) {
+
+        List<User> participants = new ArrayList<>();
+        participants.addAll(tournamentRepo.findById(tournamentId).get().getParticipants());
+        // check is place in tournament
+        if (participants.size() >= tournamentRepo.findById(tournamentId).get().getMaxParticipants()){
+            return false;
+        }
+        // check is user not in this tournament
+        User newParticipant = userRepo.findById(userId).get();
+        for (User participant : participants) {
+            if (newParticipant.getId() == participant.getId()) {
+                return false;
+            }
+        }
+        // add user
+        participants.add(newParticipant);
+        tournamentRepo.findById(tournamentId).get().setParticipants(participants);
+        tournamentRepo.findById(tournamentId).get().setSeededPlayers(tournamentRepo.findById(tournamentId).get().getSeededPlayers()+1);
+        Tournament tournament = tournamentRepo.findById(tournamentId).get();
+        tournamentRepo.save(tournament);
+        return true;
     }
 
 //    @EventListener(ApplicationReadyEvent.class)
