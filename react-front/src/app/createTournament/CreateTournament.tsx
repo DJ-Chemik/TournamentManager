@@ -40,6 +40,7 @@ const CreateTournament = (props: Props) => {
             name: String(nameInput.value),
             discipline: String(disciplineInput.value),
             time: dateInput.value,
+            lastDayOfApplications: lastDayInput.value,
             organizer: props.loggedUser,
             googleMap: String(placeInput.value),
             seededPlayers: 0,
@@ -50,6 +51,7 @@ const CreateTournament = (props: Props) => {
         axios.post("http://localhost:8080/api/tournaments/add", tournament)
             .then( response => {
                 console.log(response.data);
+                props.goToMainPage();
             })
             .catch( error => {
                 console.log("Error: " + error);
@@ -59,7 +61,6 @@ const CreateTournament = (props: Props) => {
     const handleSubmit = () => {
         if(checkAreAllFieldsCorrect()){
             createTournament();
-            props.goToMainPage();
         }
     }
 

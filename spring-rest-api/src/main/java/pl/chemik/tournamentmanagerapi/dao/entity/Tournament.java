@@ -49,7 +49,18 @@ public class Tournament {
         public int seededPlayers;
         public int maxParticipants;
         public LocalDate lastDayOfApplications;
+    }
 
+    public static class TournamentInputWithId {
+        public Long id;
+        public String name;
+        public String discipline;
+        public LocalDate time;
+        public Long organizer;
+        public String googleMap;
+        public int seededPlayers;
+        public int maxParticipants;
+        public LocalDate lastDayOfApplications;
     }
 
     public Tournament() {

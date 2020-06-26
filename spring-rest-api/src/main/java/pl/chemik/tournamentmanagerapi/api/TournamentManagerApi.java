@@ -12,6 +12,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api")
+//@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @CrossOrigin
 public class TournamentManagerApi {
 
@@ -47,8 +48,8 @@ public class TournamentManagerApi {
     }
 
     @PutMapping("/tournaments/update")
-    public Tournament updateTournament(@RequestBody Tournament.TournamentInput tournament) {
-        return tournamentManager.save(tournament);
+    public Tournament updateTournament(@RequestBody Tournament.TournamentInputWithId tournament) {
+        return tournamentManager.update(tournament);
     }
 
     @DeleteMapping("/tournaments/delete")

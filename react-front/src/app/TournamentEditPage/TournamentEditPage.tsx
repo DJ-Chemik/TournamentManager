@@ -39,19 +39,22 @@ const TournamentEditPage = (props: Props) => {
 
   const editTournament = () => {
     const tournament = {
+        id: props.tournament?.id,
         name: String(nameInput.value),
         discipline: String(disciplineInput.value),
         time: dateInput.value,
+        lastDayOfApplications: lastDayInput.value,
         organizer: props.loggedUser,
         googleMap: String(placeInput.value),
-        seededPlayers: 0,
         maxParticipants: maxPartiicipantsInput.value,
-
     }
       
-    axios.post("http://localhost:8080/api/tournaments/edit", tournament)
+    // console.log(lastDayInput.value);
+
+    axios.put("http://localhost:8080/api/tournaments/update", tournament)
         .then( response => {
             console.log(response.data);
+            props.goToMainPage();
         })
         .catch( error => {
             console.log("Error: " + error);
@@ -61,7 +64,7 @@ const TournamentEditPage = (props: Props) => {
   const handleSubmit = () => {
       if(checkAreAllFieldsCorrect()){
           editTournament();
-          props.goToMainPage();
+          
       }
   }
 

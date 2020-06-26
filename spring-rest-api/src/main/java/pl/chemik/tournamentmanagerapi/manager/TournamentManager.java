@@ -52,6 +52,20 @@ public class TournamentManager {
         return tournamentRepo.save(tournament);
     }
 
+    public Tournament update(Tournament.TournamentInputWithId input){
+        Tournament tournament = tournamentRepo.findById(input.id).get();
+        tournament.setName(input.name);
+        tournament.setDiscipline(input.discipline);
+        tournament.setTime(input.time);
+        User organizer = userRepo.findById(input.organizer).get();
+        tournament.setOrganizer(organizer);
+        tournament.setLastDayOfApplications(input.lastDayOfApplications);
+        tournament.setGoogleMap(input.googleMap);
+        tournament.setMaxParticipants(input.maxParticipants);
+        tournament.setSeededPlayers(input.seededPlayers);
+        return tournamentRepo.save(tournament);
+    }
+
     public void deleteById(Long id) {
         tournamentRepo.deleteById(id);
     }
