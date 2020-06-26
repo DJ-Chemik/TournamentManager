@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Tournament, { ITournament } from '../Tournament';
+import { ITournament } from '../Tournament';
 
 interface Props {
   tournament?: ITournament;

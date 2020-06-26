@@ -61,11 +61,11 @@ public class TournamentManagerApi {
         return userManager.findAll();
     }
 
-//    @GetMapping("/user/participates")
-//    public Iterable<Tournament> getParticipatesTournamentForUser(@RequestParam Long id){
-//        return userManager.findById(id).get().getParticipatedTournaments();
-//    }
-//
+    @GetMapping("/user/participates")
+    public Iterable<Tournament> getParticipatesTournamentForUser(@RequestParam Long id){
+        return userManager.getTournamentsWhereUserParticipates(id);
+    }
+
 //    @GetMapping("/user/organized")
 //    public Iterable<Tournament> getOrganizedTournamentForUser(@RequestParam Long id){
 //        return userManager.findById(id).get().getOrganizedTournaments();

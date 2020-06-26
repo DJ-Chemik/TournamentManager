@@ -10,6 +10,7 @@ interface Props {
   whenUserWantLogOut: () => void;
   whenUserWantRegister: () => void;
   whenUserWantOrganizeTournament: () => void
+  whenUserWantSeeInformationAboutHimself: (tournaments: ITournament[]) => void;
   goToOneTournamentInformation: (tournament: ITournament) => void;
   loggedUser: number;
 }
@@ -78,6 +79,19 @@ const MainPage = (props: Props) => {
     
   }
 
+  const handleButtonSeeParticipatesTournaments = () => {
+    const fetchInfo = () => {
+      axios.get("http://localhost:8080/api/user/participates", {params: {id: props.loggedUser}})
+      .then( (response) => {
+        props.whenUserWantSeeInformationAboutHimself(response.data);
+      })
+      .catch((error) => {
+        console.log("Error: " + error);
+      })
+    }
+    fetchInfo();    
+  }
+
   const searchInTiles = () => {
     const tmp : ITournament[] = [];
     console.log(searchedTextInput.value);
@@ -110,6 +124,7 @@ const MainPage = (props: Props) => {
             <div>
               <div>
                 <button onClick={handleButtonOrganizeTournament}>Zorganizuj własny turniej</button>
+                <button onClick={handleButtonSeeParticipatesTournaments}>Zobacz na jakie turnieje jesteś zapisany</button>
                 {result}
                 <button onClick={handleButtonLogOut}>Wyloguj się</button>
               </div>
