@@ -65,6 +65,9 @@ const CreateTournament = (props: Props) => {
 
     return(
         <div>
+            <div>
+                <button onClick={props.goToMainPage}>Wróć do strony głównej</button>
+            </div>
             Nazwa: <input type="text" onChange={nameInput.onChange}/><br/>
             Dyscyplina: <input type="text" onChange={disciplineInput.onChange}/><br/>
             Data turnieju: <input type="date" onChange={dateInput.onChange}/><br/>

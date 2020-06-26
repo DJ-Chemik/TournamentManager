@@ -6,6 +6,7 @@ interface Props {
   tournament?: ITournament;
   goToMainPage: ()=>void;
   whenUserWantLogIn: () => void;
+  whenUserWantEditTournament: () => void;
   loggedUser: number;
 }
 
@@ -29,7 +30,7 @@ const TournamentViewPage = (props: Props) => {
   }
   
   const handleClickEditTournament = () => {
-    
+    props.whenUserWantEditTournament();
   }
 
   const InteractionsWithTournament = () => {

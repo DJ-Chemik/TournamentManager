@@ -6,12 +6,14 @@ import TournamentViewPage from './tournamentViewPage/TournamentViewPage';
 import { ITournament } from './Tournament';
 import CreateTournament from './createTournament/CreateTournament';
 import UserPanel from './userInfo/UserPanel';
+import TournamentEditPage from './TournamentEditPage/TournamentEditPage';
 
 export enum Pages {
   Main,
   Login,
   Tournament,
   CreateTournament,
+  EditTournament,
   UserInfo
 }
 
@@ -56,6 +58,7 @@ function App() {
           tournament={selectedTournament}
           goToMainPage={()=>{setActualPage(Pages.Main)}}
           whenUserWantLogIn={() => { setActualPage(Pages.Login); }}
+          whenUserWantEditTournament={()=>{setActualPage(Pages.EditTournament)}}
           loggedUser={loggedUser}
         />
       </div>
@@ -67,6 +70,17 @@ function App() {
         <CreateTournament
           goToMainPage={()=>{setActualPage(Pages.Main)}}
           loggedUser={loggedUser}
+        />
+      </div>
+    );
+  }
+  if(actualPage===Pages.EditTournament){
+    return (
+      <div className="App">        
+        <TournamentEditPage
+          goToMainPage={()=>{setActualPage(Pages.Main)}}
+          loggedUser={loggedUser}
+          tournament={selectedTournament}
         />
       </div>
     );
