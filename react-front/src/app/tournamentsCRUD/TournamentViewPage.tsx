@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { ITournament } from '../Tournament';
+import TournamentViewInfoPage from './TournamentViewInfoPage';
+import TournamentViewLadderPage from './TournamentViewLadderPage';
 
 interface Props {
   tournament?: ITournament;
@@ -10,73 +12,45 @@ interface Props {
   loggedUser: number;
 }
 
+enum ViewPageMode{
+  STANDARD_INFO,
+  LADDER
+}
+
 const TournamentViewPage = (props: Props) => {
+  const [displayMode, setDisplayMode] = useState<ViewPageMode>(ViewPageMode.STANDARD_INFO); 
 
-  const handleClickSignUpForTournament = () => {
-    axios({
-      "method": "POST",
-      "url": "http://localhost:8080/api/signusertotournament",
-      "params": {
-        tournamentId: props.tournament?.id,
-        userId: props.loggedUser,
-      }
-    })
-      .then( response => {
-          console.log(response.data);
-      })
-      .catch( error => {
-          console.log("Error: " + error);
-      });
-  }
-  
-  const handleClickEditTournament = () => {
-    props.whenUserWantEditTournament();
-  }
-
-  const InteractionsWithTournament = () => {
-    if (props.loggedUser!==-1) {
-      return(
-        <div>
-          <button onClick={handleClickSignUpForTournament}>Zapisz się na turniej</button>
-          {
-            props.loggedUser===props.tournament?.organizer.id &&
-            <button onClick={handleClickEditTournament}>Edytuj informacje o turnieju</button>
-          }
-        </div>
-      )
+  const handleChangeView = () => {
+    if (displayMode===ViewPageMode.LADDER) {
+      setDisplayMode(ViewPageMode.STANDARD_INFO);
     }
-    return(
-      <div>
-        <button onClick={props.whenUserWantLogIn}>Zaloguj się aby móc zapisać się na turniej lub edytować go</button>
-      </div>
-    )
+    if (displayMode===ViewPageMode.STANDARD_INFO) {
+      setDisplayMode(ViewPageMode.LADDER);
+    }
   }
 
-  return (
+  return(
     <div>
-      <div>
-        <button onClick={props.goToMainPage}>Wróć do strony głównej</button>
-      </div>
-      <div>
-        Turniej numer {props.tournament?.id}
-      </div>
-      <InteractionsWithTournament/>
-      <div>
-        Nazwa: {props.tournament?.name} <br/>
-        Dyscyplina: {props.tournament?.discipline} <br/>
-        Organizator: {props.tournament?.organizer.name} {props.tournament?.organizer.surname}<br/>
-        Data rozgrywania: {props.tournament?.time} <br/>
-        Google Map: {props.tournament?.googleMap} <br/>
-      </div>
-      <div>
-        Liczba zgłoszonych uczestników: {props.tournament?.seededPlayers} / {props.tournament?.maxParticipants} <br/>
-        Możliwość składania zgłoszeń do: {props.tournament?.lastDayOfApplications}  
-      </div>
-      <div style={{backgroundColor: "red"}}>
-        Loga sponsorów: @TODO
-      </div>
+      <button onClick={handleChangeView}>Przełącz tryb widoku</button>
+      { displayMode===ViewPageMode.STANDARD_INFO &&
+        <TournamentViewInfoPage
+          tournament={props.tournament}
+          goToMainPage={props.goToMainPage}
+          whenUserWantLogIn={props.whenUserWantLogIn}
+          whenUserWantEditTournament={props.whenUserWantEditTournament}
+          loggedUser={props.loggedUser}
+        />
+      }
+      { displayMode===ViewPageMode.LADDER &&
+        <TournamentViewLadderPage
+          tournament={props.tournament}
+          goToMainPage={props.goToMainPage}
+          loggedUser={props.loggedUser}
+        />
+      }      
     </div>
-  );
+    
+  )  
 }
 
 export default TournamentViewPage;
