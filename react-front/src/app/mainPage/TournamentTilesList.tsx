@@ -12,34 +12,6 @@ const TournamentTilesList = ({tournaments, pagination, goToOneTournamentInformat
   const [tournamentTiles, setTournamentTiles] = useState<any>();
   const [amoutPages, setAmountPages] = useState<number>(1);
   const [actualPage, setActualPage] = useState<number>(1);
-  
-  // const initializeListFromProps = React.useCallback( () => {
-  //   if(tournaments){
-  //     const tenTournaments = [];
-  //     let firstIndex = actualPage * 10 - 10;
-  //     let lastIndex = actualPage * 10 - 1;
-  //     for (let i = firstIndex; i <= lastIndex; i++) {
-  //       tenTournaments.push(tournaments[i]);        
-  //     }
-      
-  //     return(
-  //       tenTournaments.map( (tournament: ITournament) => {
-  //           return(
-  //             <ul key={tournament.id}>
-  //               <TournamentTile
-  //                 name={tournament.name}
-  //                 discipline={tournament.discipline}
-  //                 date={tournament.time}
-  //                 onClick={()=>{ goToOneTournamentInformation(tournament)}}
-  //               />
-  //             </ul>
-  //           )
-  //         }
-  //       )
-  //     );
-  //   }
-  //   return null;
-  // },[goToOneTournamentInformation, tournaments])
 
   const initializeListFromProps = React.useCallback( () => {
     if(tournaments){
@@ -53,8 +25,6 @@ const TournamentTilesList = ({tournaments, pagination, goToOneTournamentInformat
           break;
         }
       }
-      console.log(tenTournaments);
-      
       
       return(
         tenTournaments.map( (tournament: ITournament) => {
