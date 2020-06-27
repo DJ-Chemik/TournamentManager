@@ -53,11 +53,6 @@ const TournamentTilesList = ({tournaments, pagination, goToOneTournamentInformat
     setTournamentTiles(tmp);
   }, [tournaments, initializeListFromProps]);
   
-  useEffect(()=>{
-    const tmp = initializeListFromProps();
-    setTournamentTiles(tmp);
-  }, [actualPage])
-  
   const handleClickPreviousPage = () => {
     if(actualPage>1){
       setActualPage(actualPage - 1);

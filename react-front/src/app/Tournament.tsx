@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User } from './logging/User';
+import { User } from './User';
 
 export interface ITournament {
     id: number,

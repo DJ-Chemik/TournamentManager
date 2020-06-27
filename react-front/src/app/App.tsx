@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import './App.css';
 import LoginPage from './logging/LoginPage';
 import MainPage from './mainPage/MainPage';
-import TournamentViewPage from './tournamentViewPage/TournamentViewPage';
+import TournamentViewPage from './tournamentsCRUD/TournamentViewPage';
 import { ITournament } from './Tournament';
-import CreateTournament from './createTournament/CreateTournament';
+import CreateTournament from './tournamentsCRUD/CreateTournament';
 import UserPanel from './userInfo/UserPanel';
-import TournamentEditPage from './TournamentEditPage/TournamentEditPage';
+import TournamentEditPage from './tournamentsCRUD/TournamentEditPage';
 
 export enum Pages {
   Main,
