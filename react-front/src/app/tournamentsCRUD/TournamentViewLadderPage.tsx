@@ -1,5 +1,7 @@
 import React from 'react';
 import { ITournament } from '../Tournament';
+import UserTile from '../userInfo/UserTile';
+import { User } from '../User';
 
 interface Props {
     tournament?: ITournament;
@@ -9,6 +11,27 @@ interface Props {
 
 const TournamentViewLadderPage = (props: Props) => {
     
+    // const initializeListOfUserTiles = React.useCallback( () => {
+    //     if(participants){
+          
+    //       return(
+    //         participants.map( (user: User) => {
+    //             return(
+    //               <ul key={user.id}>
+    //                 <UserTile
+    //                   name={user.name}
+    //                   surname={user.surname}
+    //                   onClick={()=>{ goToOneTournamentInformation(user)}}
+    //                 />
+    //               </ul>
+    //             )
+    //           }
+    //         )
+    //       );
+    //     }
+    //     return null;
+    // },[tournament])
+
     return(
         <div>
             <div>
