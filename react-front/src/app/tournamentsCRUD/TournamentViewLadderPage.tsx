@@ -46,21 +46,49 @@ const TournamentViewLadderPage = (props: Props) => {
 
     const initializeLadder = () => {
         let numberOfSteps = 0;
-        const participantsInStep = [];
+        const participantsNumberInStep = [];
         
         let tmpCount = participantsCount;
         while(tmpCount!==1){
-            console.log(tmpCount);
-            participantsInStep.push(tmpCount);
+            participantsNumberInStep.push(tmpCount);
             if(tmpCount){
                 tmpCount= Math.ceil(tmpCount / 2);
             }
-            console.log(tmpCount);
+            numberOfSteps = numberOfSteps + 1;
         }
+        participantsNumberInStep.push(1);
+        numberOfSteps = numberOfSteps + 1;
+
+        const mockedParticipants = [];
+        mockedParticipants.push(participants);
+        for (let i = 0; i < numberOfSteps; i++) {
+            const users: any[] = [];
+            if(mockedParticipants){
+                    console.log(mockedParticipants[i]);
+                    const tmp = mockedParticipants[i];
+                    if(tmp){
+                        for (let j = 0; j < tmp.length; j+=2) {
+                            if(Math.random()<0.5){
+                                users.push(tmp[j])
+                            }else{
+                                users.push(tmp[j+1])
+                            }                      
+                        }
+                    }
+            }
+            mockedParticipants?.push(users); 
+        }
+
         return(
             <div>
-                <LadderOneStep/>
-                {participantsCount}
+                {mockedParticipants?.map((mocked) => {
+                    return(
+                        <LadderOneStep
+                            participantsInStep={mocked?.length as number}
+                            participants={mocked as User[]}
+                        />
+                    )
+                })}
             </div>
         )
 

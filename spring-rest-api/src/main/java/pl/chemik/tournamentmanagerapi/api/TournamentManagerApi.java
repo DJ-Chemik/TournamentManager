@@ -131,6 +131,27 @@ public class TournamentManagerApi {
         User user2 = new User(
                 2L, "Marek", "Marecki", "marek321@o2.pl", "marzenka", true
         );
+        User user3 = new User(
+                3L, "Adrian", "Bogucki", "adrian@gmail.com", "jammesjasz", true
+        );
+        User user4 = new User(
+                4L, "Filip", "Kajzerka", "chlebek@wp.pl", "filipek22", true
+        );
+        User user5 = new User(
+                5L, "Dominik", "Malina", "otto1434@onet.pl", "koniuszek", true
+        );
+        User user6 = new User(
+                6L, "Zdzisława", "Zdomowiała", "ameryka-trump@chinese.ch", "magia", true
+        );
+        User user7 = new User(
+                7L, "Zygmunt", "Wieża-Brodnicki", "wazazupydo@łupy.pl", "12345", true
+        );
+        User user8 = new User(
+                8L, "Albert", "Chrypka", "zxcqwerty@gmail.com", "qwert4", true
+        );
+        User user9 = new User(
+                9L, "Aleksiej", "Schodow", "putin@russian.ru", "uczony", true
+        );
 
         Tournament tournament1 = new Tournament(
                 1L, "Pierwszy Turniej", "LOL",
@@ -154,6 +175,15 @@ public class TournamentManagerApi {
 //        Set<User> participants = new HashSet<>();
         List<User> participants = new ArrayList<>();
         participants.add(user1);
+        participants.add(user2);
+        participants.add(user3);
+        participants.add(user4);
+        participants.add(user5);
+        participants.add(user6);
+        participants.add(user7);
+        participants.add(user8);
+//        participants.add(user9);
+
         tournament1.setParticipants(participants);
 
 //        Set<User> participants2 = new HashSet<>();
@@ -163,6 +193,13 @@ public class TournamentManagerApi {
         tournament2.setParticipants(participants2);
         userManager.save(user1);
         userManager.save(user2);
+        userManager.save(user3);
+        userManager.save(user4);
+        userManager.save(user5);
+        userManager.save(user6);
+        userManager.save(user7);
+        userManager.save(user8);
+        userManager.save(user9);
         tournamentManager.save(tournament1);
         tournamentManager.save(tournament2);
         tournamentManager.save(tournament3);

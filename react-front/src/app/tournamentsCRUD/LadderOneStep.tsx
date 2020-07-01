@@ -1,38 +1,35 @@
 import React from 'react';
+import { User } from '../User';
+import UserTile from '../userInfo/UserTile';
 
 interface Props {
-
+    participantsInStep: number;
+    participants: User[];
 }
 
 const LadderOneStep = (props: Props) => {
 
-    // const initializeListOfUserTiles = React.useCallback( () => {
-    //     if(participants){
-        
-    //       return(
-    //         participants.map( (user: User) => {
-    //             return(
-    //               <ul key={user.id}>
-    //                 <UserTile
-    //                   name={user.name}
-    //                   surname={user.surname}
-    //                   onClick={()=>{ goToOneTournamentInformation(user)}}
-    //                 />
-    //               </ul>
-    //             )
-    //           }
-    //         )
-    //       );
-    //     }
-    //     return null;
-    // },[tournament])
-
-
-    return(
-        <div>
-            XXX
-        </div>
-    )
+    if(props.participants){
+        return(
+            <div style={{backgroundColor: "#eee", margin: "30px", display: "flex"}}>
+                {props.participants.map((participant)=>{
+                    return(
+                        <UserTile
+                            name={participant.name}
+                            surname={participant.surname}
+                            width={String(window.innerWidth / props.participantsInStep) + "%"}
+                        />
+                    )
+                })}
+            </div>
+        )
+    }else{
+        return(
+            <div style={{backgroundColor: "#eee", margin: "30px", display: "flex"}}>
+                ---
+            </div>
+        )
+    }
 }
 
 export default LadderOneStep;
