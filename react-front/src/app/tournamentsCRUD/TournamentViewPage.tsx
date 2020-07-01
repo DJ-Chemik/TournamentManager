@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { ITournament } from '../Tournament';
 import TournamentViewInfoPage from './TournamentViewInfoPage';
 import TournamentViewLadderPage from './TournamentViewLadderPage';
