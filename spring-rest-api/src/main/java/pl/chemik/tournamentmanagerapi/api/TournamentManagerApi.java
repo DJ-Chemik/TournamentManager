@@ -154,25 +154,24 @@ public class TournamentManagerApi {
         );
 
         Tournament tournament1 = new Tournament(
-                1L, "Pierwszy Turniej", "LOL",
-                LocalDate.of(2020, 07, 07), "Konin",
-                100, LocalDate.of(2020, 07, 06), 50
+                1L, "Euro 2031", "Piłka Nożna",
+                LocalDate.of(2031, 06, 01), "Bukareszt",
+                16, LocalDate.of(2030, 06, 01), 8
         );
         Tournament tournament2 = new Tournament(
-                2L, "Drugi Turniej", "Mafia 2",
-                LocalDate.of(2020, 10, 07), "Poznań",
-                30, LocalDate.of(2020, 10, 01), 15
+                2L, "Turniej Kostki Rubika", "Układanie kostki rubika",
+                LocalDate.of(2020, 10, 07), "Konin",
+                32, LocalDate.of(2020, 10, 01), 5
         );
         Tournament tournament3 = new Tournament(
-                3L, "Turniej 3 skoczni", "Skoki",
+                3L, "Turniej 3 skoczni", "Skoki narciarskie",
                 LocalDate.of(2020, 12, 27), "Zakopane",
-                15, LocalDate.of(2020, 11, 30), 12
+                8, LocalDate.of(2020, 11, 30), 8
         );
 
         tournament1.setOrganizer(user1);
         tournament2.setOrganizer(user2);
         tournament3.setOrganizer(user1);
-//        Set<User> participants = new HashSet<>();
         List<User> participants = new ArrayList<>();
         participants.add(user1);
         participants.add(user2);
@@ -182,15 +181,25 @@ public class TournamentManagerApi {
         participants.add(user6);
         participants.add(user7);
         participants.add(user8);
-//        participants.add(user9);
+        List<User> participants2 = new ArrayList<>();
+        participants2.add(user2);
+        participants2.add(user3);
+        participants2.add(user5);
+        participants2.add(user6);
+        participants2.add(user9);
+        List<User> participants3 = new ArrayList<>();
+        participants3.add(user1);
+        participants3.add(user2);
+        participants3.add(user3);
+        participants3.add(user4);
+        participants3.add(user5);
+        participants3.add(user7);
+        participants3.add(user8);
+        participants3.add(user9);
 
         tournament1.setParticipants(participants);
-
-//        Set<User> participants2 = new HashSet<>();
-        List<User> participants2 = new ArrayList<>();
-        participants2.add(user1);
-        participants2.add(user2);
         tournament2.setParticipants(participants2);
+        tournament3.setParticipants(participants3);
         userManager.save(user1);
         userManager.save(user2);
         userManager.save(user3);

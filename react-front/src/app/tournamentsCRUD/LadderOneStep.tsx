@@ -13,13 +13,14 @@ const LadderOneStep = (props: Props) => {
         return(
             <div style={{backgroundColor: "#eee", margin: "30px", display: "flex"}}>
                 {props.participants.map((participant)=>{
+                    if(participant){
                     return(
                         <UserTile
                             name={participant.name}
                             surname={participant.surname}
                             width={String(window.innerWidth / props.participantsInStep) + "%"}
                         />
-                    )
+                    )}
                 })}
             </div>
         )
