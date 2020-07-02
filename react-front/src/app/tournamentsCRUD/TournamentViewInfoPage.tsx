@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { ITournament } from '../Tournament';
+import GoogleMapComponent from '../googleMap/GoogleMapComponent';
 
 interface Props {
     tournament?: ITournament;
@@ -60,12 +61,13 @@ const TournamentViewInfoPage = (props: Props) => {
             Turniej numer {props.tournament?.id}
           </div>
           <InteractionsWithTournament/>
-          <div>
+          <div style={{textAlign: "center"}}>
             Nazwa: {props.tournament?.name} <br/>
             Dyscyplina: {props.tournament?.discipline} <br/>
             Organizator: {props.tournament?.organizer.name} {props.tournament?.organizer.surname}<br/>
             Data rozgrywania: {props.tournament?.time} <br/>
             Google Map: {props.tournament?.googleMap} <br/>
+            <GoogleMapComponent></GoogleMapComponent>
           </div>
           <div>
             Liczba zgłoszonych uczestników: {props.tournament?.seededPlayers} / {props.tournament?.maxParticipants} <br/>
